@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 80%;
+            margin: 0 auto;
+        }
+        textarea, button {
+            display: block;
+        }
+        button {
+            font-size: 18px;
+            margin-top: 10px;
+            padding: 10px 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Paste transcript here:</h2>
+    <textarea class="area" rows="25" cols="100"></textarea>
+    <button class="button">Format</button>
+    <script>
+        var textArea = document.querySelector("textarea");
+        var words = [
+            ["i'", "I'"],
+            [" i ", " I "],
+            ["ntd", "NTD"],
+            ["donald", "Donald"],
+            ["trump", "Trump"],
+            ["joe", "Joe"],
+            ["biden", "Biden"],
+            ["america", "America"],
+            ["china", "China"],
+            ["chinese", "Chinese"],
+            ["u.s", "US"],
+            ["united states", "United States"],
+        ]
+        
+        document.querySelector("button").addEventListener("click", function(){
+            var list = textArea.value.trim().split("\n");
+            list.forEach((line, i) => {
+                if(line.includes(":") && line.length == 5) {
+                    list.splice(i, 1);
+                }
+            });
+           var text = list.join(" ");
+           words.forEach(word => {
+                text = text.replaceAll(word[0], word[1]);
+           })
+            textArea.value = text;
+
+        });
+    </script>
+</body>
+</html>
